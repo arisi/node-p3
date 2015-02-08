@@ -1,0 +1,28 @@
+{
+  "name": "node-srec",
+  "version": "0.0.4",
+  "description": "Motorola S-record library",
+  "main": "node-srec.js",
+  "dependencies": {
+    "sprintf": ""
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+        "node-srec-cli": "node-srec-cli.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/arisi/node-srec.git"
+  },
+  "keywords": [
+    "srecord","srec","motorola"
+  ],
+  "author": "Ari Siitonen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/arisi/node-srec/issues"
+  }
+}

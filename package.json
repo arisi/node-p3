@@ -1,0 +1,25 @@
+{
+  "name": "node-p3",
+  "version": "0.0.1",
+  "description": "Simplified PPP ",
+  "main": "node-p3.js",
+  "dependencies": {
+    "sprintf": ""
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/arisi/node-p3.git"
+  },
+  "keywords": [
+    "ppp","p3"
+  ],
+  "author": "Ari Siitonen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/arisi/node-p3/issues"
+  }
+}
