@@ -19,8 +19,7 @@
   module.exports.plist = plist;
 
   module.exports.pack = pack = function(pac) {
-    var b, buf, ch, check, ips, macs, _i, _j, _len, _len1, _ref;
-    console.log("p3_outpac", pac);
+    var b, buf, ch, check, ips, macs, obuf, _i, _j, _k, _len, _len1, _len2, _ref;
     buf = [];
     buf.push(pac["proto"].charCodeAt(0));
     macs = pac["mac"].split(":");
@@ -47,10 +46,17 @@
       check ^= b;
     }
     buf.push(check);
-    buf.unshift(P3_START);
-    buf.push(P3_END);
-    console.log(buf);
-    return buf;
+    obuf = [];
+    for (_k = 0, _len2 = buf.length; _k < _len2; _k++) {
+      b = buf[_k];
+      if (b === P3_START || b === P3_END || b === P3_ESC) {
+        obuf.push(P3_ESC);
+      }
+      obuf.push(b);
+    }
+    obuf.unshift(P3_START);
+    obuf.push(P3_END);
+    return obuf;
   };
 
   module.exports.inchar = inchar = function(p, ch, cb) {
@@ -61,10 +67,11 @@
         p3esc: false,
         p3buf: [],
         stamp: 0,
-        id: ""
+        id: "",
+        in_cnt: 0,
+        out_cnt: 0
       };
       plistp[p] = {};
-      console.log("added plist", plist);
     }
     plist[p].exist = stamp();
     if (ch === P3_START && !plist[p].p3esc && !plist[p].p3) {
@@ -73,6 +80,7 @@
       return true;
     } else if (ch === P3_END && !plist[p].p3esc && plist[p].p3) {
       plist[p].lastp3 = stamp();
+      plist[p].in_cnt += 1;
       cb(p, plist[p].p3buf);
       plist[p].p3 = false;
       return true;

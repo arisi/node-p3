@@ -13,7 +13,7 @@ stamp = () ->
 
 module.exports.plist=plist
 module.exports.pack=pack = (pac) ->
-  console.log "p3_outpac",pac
+  #console.log "p3_outpac",pac
 
   buf=[]
   buf.push pac["proto"].charCodeAt(0)
@@ -39,18 +39,22 @@ module.exports.pack=pack = (pac) ->
   for b in buf
     check^=b
   buf.push check
-  buf.unshift P3_START
-  buf.push P3_END
-  console.log buf
 
-  #hey!! escaping
-  buf
+  obuf=[]
+  for b in buf
+    if b==P3_START or b==P3_END or b==P3_ESC
+      obuf.push P3_ESC
+    obuf.push b
+
+  obuf.unshift P3_START
+  obuf.push P3_END
+  obuf
 
 module.exports.inchar=inchar = (p,ch,cb) ->
   if not plist[p]
-    plist[p]={state: "init",p3: false, p3esc: false,p3buf: [],stamp: 0, id:"" }
+    plist[p]={state: "init",p3: false, p3esc: false,p3buf: [],stamp: 0, id:"", in_cnt:0,out_cnt:0 }
     plistp[p]={}
-    console.log "added plist",plist
+    #console.log "added plist",plist
 
   plist[p].exist=stamp()
 
@@ -61,6 +65,7 @@ module.exports.inchar=inchar = (p,ch,cb) ->
   else if ch==P3_END and not plist[p].p3esc and plist[p].p3
     #console.log "p3 packet in #{p},#{plist[p].p3buf}"
     plist[p].lastp3=stamp()
+    plist[p].in_cnt+=1
     cb p,plist[p].p3buf
     plist[p].p3=false
     return true
