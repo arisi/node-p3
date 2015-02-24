@@ -33,7 +33,7 @@
     buf.push(parseInt(ips[1]));
     buf.push(parseInt(ips[0]));
     buf.push(pac["port"] & 0xff);
-    buf.push(pac["port"] / 0x100);
+    buf.push(Math.floor(pac["port"] / 0x100));
     buf.push(pac["data"].length);
     _ref = pac["data"].split("");
     for (_i = 0, _len = _ref.length; _i < _len; _i++) {

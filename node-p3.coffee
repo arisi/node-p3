@@ -31,7 +31,7 @@ module.exports.pack=pack = (pac) ->
   buf.push parseInt(ips[0])
 
   buf.push (pac["port"]&0xff)
-  buf.push pac["port"]/0x100
+  buf.push Math.floor( pac["port"]/0x100)
   buf.push pac["data"].length
   for ch in pac["data"].split("")
     buf.push ch.charCodeAt(0)
