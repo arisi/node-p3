@@ -1,8 +1,8 @@
 {
-  "name": "node-srec",
-  "version": "0.0.4",
-  "description": "Motorola S-record library",
-  "main": "node-srec.js",
+  "name": "node-p3",
+  "version": "0.0.2",
+  "description": "Simplified PPP ",
+  "main": "node-p3.js",
   "dependencies": {
     "sprintf": ""
   },
@@ -10,19 +10,16 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "bin": {
-        "node-srec-cli": "node-srec-cli.js"
-  },
   "repository": {
     "type": "git",
-    "url": "https://github.com/arisi/node-srec.git"
+    "url": "https://github.com/arisi/node-p3.git"
   },
   "keywords": [
-    "srecord","srec","motorola"
+    "ppp","p3"
   ],
   "author": "Ari Siitonen",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/arisi/node-srec/issues"
+    "url": "https://github.com/arisi/node-p3/issues"
   }
 }
